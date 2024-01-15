@@ -32,7 +32,7 @@ properties:
       - name: services__repos__1
         value: https://repos.{{ .Env.AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN }}
     scale:
-      minReplicas: 1
+      minReplicas: 0
 tags:
   azd-service-name: frontend
   aspire-resource-name: frontend

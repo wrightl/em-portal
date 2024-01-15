@@ -28,7 +28,7 @@ properties:
       - name: OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES
         value: "true"
     scale:
-      minReplicas: 1
+      minReplicas: 0
 tags:
   azd-service-name: repos
   aspire-resource-name: repos
