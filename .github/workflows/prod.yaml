@@ -1,0 +1,10 @@
+on:
+    workflow_dispatch:
+    push:
+        branches: [master]
+
+jobs:
+    deploy-prod:
+        uses: ./.github/workflows/deploy.yaml
+        with:
+            AZURE_ENV_NAME: prod
