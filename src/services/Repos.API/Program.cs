@@ -2,7 +2,9 @@ using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add aspire components
 builder.AddServiceDefaults();
+builder.AddRedisDistributedCache("cache");
 
 builder.Services.AddControllers();
 
