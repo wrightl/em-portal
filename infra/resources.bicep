@@ -64,6 +64,28 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' 
   tags: tags
 }
 
+resource cache 'Microsoft.App/containerApps@2023-05-02-preview' = {
+  name: 'cache'
+  location: location
+  properties: {
+    environmentId: containerAppEnvironment.id
+    configuration: {
+      service: {
+        type: 'redis'
+      }
+    }
+    template: {
+      containers: [
+        {
+          image: 'redis'
+          name: 'redis'
+        }
+      ]
+    }
+  }
+  tags: union(tags, {'aspire-resource-name': 'cache'})
+}
+
 
 output MANAGED_IDENTITY_CLIENT_ID string = managedIdentity.properties.clientId
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = containerRegistry.properties.loginServer
