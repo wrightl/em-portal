@@ -4,6 +4,8 @@ on:
     pull_request:
         branches: [master]
 
+permissions: read-all
+
 jobs:
     deploy-dev:
         uses: ./.github/workflows/deploy.yaml
