@@ -9,7 +9,7 @@ properties:
   configuration:
     activeRevisionsMode: single
     ingress:
-      external: {{ eq(env.AZURE_ENV_NAME, 'dev') }}
+      external: {{ eq(.Env.AZURE_ENV_NAME, 'dev') }}
       targetPort: 8080
       transport: http
       allowInsecure: false
