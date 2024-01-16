@@ -23,11 +23,11 @@ jobs:
     build:
         runs-on: ubuntu-latest
         env:
+            AZURE_ENV_NAME: ${{ inputs.AZURE_ENV_NAME }}
             AZURE_CLIENT_ID: ${{ inputs.AZURE_CLIENT_ID }}
             AZURE_TENANT_ID: ${{ inputs.AZURE_TENANT_ID }}
             AZURE_SUBSCRIPTION_ID: ${{ inputs.AZURE_SUBSCRIPTION_ID }}
             AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-            AZURE_ENV_NAME: ${{ inputs.AZURE_ENV_NAME }}
         steps:
             - name: Checkout
               uses: actions/checkout@v3
@@ -38,6 +38,7 @@ jobs:
             - name: Log in with Azure (Federated Credentials)
               if: ${{ env.AZURE_CLIENT_ID != '' }}
               run: |
+                  Write-Host "$Env:AZURE_CLIENT_ID"
                   azd auth login `
                     --client-id "$Env:AZURE_CLIENT_ID" `
                     --federated-credential-provider "github" `
