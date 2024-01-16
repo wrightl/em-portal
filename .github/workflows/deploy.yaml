@@ -19,10 +19,6 @@ on:
             AZURE_CREDENTIALS:
                 required: true
 
-# permissions:
-#     id-token: write
-#     contents: read
-
 jobs:
     build:
         runs-on: ubuntu-latest
