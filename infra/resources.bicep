@@ -86,6 +86,31 @@ resource cache 'Microsoft.App/containerApps@2023-05-02-preview' = {
   tags: union(tags, {'aspire-resource-name': 'cache'})
 }
 
+resource prometheus 'Microsoft.App/containerApps@2023-05-02-preview' = {
+  name: 'prometheus'
+  location: location
+  properties: {
+    environmentId: containerAppEnvironment.id
+    configuration: {
+      activeRevisionsMode: 'Single'
+      ingress: {
+        external: false
+        targetPort: 9090
+        transport: 'tcp'
+      }
+    }
+    template: {
+      containers: [
+        {
+          image: 'prom/prometheus:latest'
+          name: 'prometheus'
+        }
+      ]
+    }
+  }
+  tags: union(tags, {'aspire-resource-name': 'prometheus'})
+}
+
 
 output MANAGED_IDENTITY_CLIENT_ID string = managedIdentity.properties.clientId
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = containerRegistry.properties.loginServer
