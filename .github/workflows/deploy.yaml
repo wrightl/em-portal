@@ -34,6 +34,8 @@ jobs:
             AZURE_TENANT_ID: ${{ inputs.AZURE_TENANT_ID }}
             AZURE_SUBSCRIPTION_ID: ${{ inputs.AZURE_SUBSCRIPTION_ID }}
             AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+            AUTH0_DOMAIN: ${{ inputs.AUTH0_DOMAIN }}
+            AUTH0_CLIENTID: ${{ inputs.AUTH0_CLIENTID }}
         steps:
             - name: Checkout
               uses: actions/checkout@v4.1.1
