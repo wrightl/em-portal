@@ -34,9 +34,9 @@ properties:
       - name: services__repos__1
         value: https://repos.{{ .Env.AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN }}
       - name: Auth0__Domain
-        value: https://repos.{{ .Env.AUTH0_DOMAIN }}
+        value: {{ .Env.AUTH0_DOMAIN }}
       - name: Auth0__ClientId
-        value: https://repos.{{ .Env.AUTH0_CLIENTID }}
+        value: {{ .Env.AUTH0_CLIENTID }}
     scale:
       minReplicas: 0
 tags:
