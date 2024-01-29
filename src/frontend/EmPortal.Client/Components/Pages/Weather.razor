@@ -1,11 +1,16 @@
 ﻿@page "/weather"
+@attribute [Authorize]
 @attribute [StreamRendering]
 @using EmPortal.Client.Repos;
+@using System.Security.Principal;
 @inject ReposService _reposService;
 
 <PageTitle>Weather</PageTitle>
 
 <h1>Weather</h1>
+
+<p>Hello @User.Name!</p>
+<p>@User.ToString()!</p>
 
 <p>This component demonstrates showing data.</p>
 
@@ -41,8 +46,19 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        if (authenticationState is not null){
+            var state = await authenticationState;
+            User = state?.User?.Identity;
+        }
+
         forecasts = await _reposService.GetReposAsync();
     }
+
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState {get;set;}
+
+    private IIdentity User = default(IIdentity);
+
 @* 
     private class WeatherForecast
     {

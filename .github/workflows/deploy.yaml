@@ -15,6 +15,12 @@ on:
             AZURE_SUBSCRIPTION_ID:
                 required: true
                 type: string
+            AUTH0_DOMAIN:
+                required: true
+                type: string
+            AUTH0_CLIENTID:
+                required: true
+                type: string
         secrets:
             AZURE_CREDENTIALS:
                 required: true
@@ -76,3 +82,5 @@ jobs:
                   AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
                   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
                   AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+                  AUTH0_DOMAIN: ${{ vars.AUTH0_DOMAIN }}
+                  AUTH0_CLIENTID: ${{ vars.AUTH0_CLIENTID }}

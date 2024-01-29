@@ -11,6 +11,7 @@ var repos = builder.AddProject<Projects.Repos_API>("repos")
 
 builder.AddProject<Projects.EmPortal_Client>("frontend")
     .WithReference(cache)
-    .WithReference(repos);
+    .WithReference(repos)
+    .WithLaunchProfile("https");
 
 builder.Build().Run();
