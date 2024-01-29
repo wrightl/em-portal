@@ -73,8 +73,8 @@ jobs:
 
             - name: Configure pipeline
               run: |
-                  azd config set defaults.auth0_domain ${{ vars.AUTH0_DOMAIN }}
-                  azd config set defaults.auth0_clientid ${{ vars.AUTH0_CLIENTID }}
+                  azd config set defaults.auth0_domain $Env:AUTH0_DOMAIN
+                  azd config set defaults.auth0_clientid $Env:AUTH0_CLIENTID
 
             - name: Provision Infrastructure
               run: azd provision --no-prompt
