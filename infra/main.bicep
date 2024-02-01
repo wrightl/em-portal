@@ -10,6 +10,7 @@ param environmentName string
 param location string
 
 param auth0_clientid string
+param auth0_domain string
 
 @secure()
 @metadata({azd: {type: 'inputs' }})
@@ -40,4 +41,5 @@ output AZURE_CONTAINER_REGISTRY_ENDPOINT string = resources.outputs.AZURE_CONTAI
 output AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID string = resources.outputs.AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID
 output AZURE_CONTAINER_APPS_ENVIRONMENT_ID string = resources.outputs.AZURE_CONTAINER_APPS_ENVIRONMENT_ID
 output AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN string = resources.outputs.AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN
-output AUTH0_DOMAIN string = auth0_clientid
+output AUTH0_DOMAIN string = auth0_domain
+output AUTH0_CLIENTID string = auth0_clientid
