@@ -71,11 +71,6 @@ jobs:
                   dotnet workload install aspire
               shell: pwsh
 
-            # - name: Configure pipeline
-            #   run: |
-            #       azd config set defaults.auth0_domain $Env:AUTH0_DOMAIN
-            #       azd config set defaults.auth0_clientid $Env:AUTH0_CLIENTID
-
             - name: Provision Infrastructure
               run: azd provision --no-prompt
               env:
@@ -89,4 +84,3 @@ jobs:
                   AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
                   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
                   AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
-                  AUTH0_CLIENTID: ${{ vars.AUTH0_CLIENTID }}
