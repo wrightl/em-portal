@@ -7,6 +7,9 @@
       },
       "location": {
         "value": "${AZURE_LOCATION}"
+      },
+      "auth0_clientid": {
+        "value": "${AUTH0_CLIENTID}"
       }
     }
   }

@@ -89,3 +89,4 @@ jobs:
                   AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
                   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
                   AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+                  AUTH0_CLIENTID: ${{ vars.AUTH0_CLIENTID }}
