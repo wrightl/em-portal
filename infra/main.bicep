@@ -40,6 +40,8 @@ module resources 'resources.bicep' = {
     location: location
     tags: tags
     inputs: inputs
+    sql_username: sql_username
+    sql_password: sql_password
   }
 }
 
