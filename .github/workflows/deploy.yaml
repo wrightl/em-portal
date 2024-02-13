@@ -88,6 +88,7 @@ jobs:
 
             - name: Debug 2
               run : |
+                  azd env refresh
                   Write-Host "Identity: $Env:MANAGED_IDENTITY_CLIENT_ID"
                   Write-Host "Auth0: $Env:AUTH0_DOMAIN2"
                   Write-Host "Sql: $Env:SQLSERVER_NAME"
