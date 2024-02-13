@@ -8,12 +8,6 @@
         "location": {
             "value": "${AZURE_LOCATION}"
         },
-        "auth0_clientid": {
-            "value": "${AUTH0_CLIENTID}"
-        },
-        "auth0_domain": {
-            "value": "${AUTH0_DOMAIN}"
-        },
         "sql_username": {
             "value": "${SQL_USERNAME}"
         },
