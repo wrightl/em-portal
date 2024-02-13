@@ -8,6 +8,11 @@ param tags object = {}
 @metadata({azd: {type: 'inputs' }})
 param inputs object
 
+@secure()
+param sql_username string
+@secure()
+param sql_password string
+
 var resourceToken = uniqueString(resourceGroup().id)
 
 resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
@@ -62,6 +67,25 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' 
     }
   }
   tags: tags
+}
+
+resource databaseServer 'Microsoft.Sql/servers@2023-05-01-preview' = {
+  name: 'sqlserver-${resourceToken}'
+  location: location
+  properties: {
+    administratorLogin: sql_username
+    administratorLoginPassword: sql_password
+  }
+}
+
+resource database 'Microsoft.Sql/servers/databases@2023-05-01-preview' = {
+  name: '${databaseServer.name}/sqldb-${resourceToken}'
+  location: location
+  sku: {
+    name: 'Basic'
+    size: 'Basic'
+    tier: 'Basic'
+  }
 }
 
 resource cache 'Microsoft.App/containerApps@2023-05-02-preview' = {
