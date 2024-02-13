@@ -35,7 +35,6 @@ jobs:
             AZURE_CLIENT_ID: ${{ inputs.AZURE_CLIENT_ID }}
             AZURE_TENANT_ID: ${{ inputs.AZURE_TENANT_ID }}
             AZURE_SUBSCRIPTION_ID: ${{ inputs.AZURE_SUBSCRIPTION_ID }}
-            # AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
             AUTH0_DOMAIN: ${{ inputs.AUTH0_DOMAIN }}
             AUTH0_CLIENTID: ${{ inputs.AUTH0_CLIENTID }}
         steps:
@@ -73,18 +72,31 @@ jobs:
                   dotnet workload install aspire
               shell: pwsh
 
+            - name: Debug 1
+              run : |
+                  Write-Host "$Env.MANAGED_IDENTITY_CLIENT_ID"
+              shell: pwsh
+
             - name: Provision Infrastructure
               run: azd provision --no-prompt
               env:
-                #   AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
                   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
-                #   AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
                   SQL_USERNAME: ${{ secrets.SQL_USERNAME }}
                   SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+
+            - name: Debug 2
+              run : |
+                  Write-Host "$Env.MANAGED_IDENTITY_CLIENT_ID"
+                  Write-Host "$Env.SQLSERVER_NAME"
+              shell: pwsh
 
             - name: Deploy Application
               run: azd deploy --no-prompt --debug
               env:
-            #       AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
                   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
-            #       AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+            - name: Debug 3
+              run : |
+                  Write-Host "$Env.MANAGED_IDENTITY_CLIENT_ID"
+                  Write-Host "$Env.SQLSERVER_NAME"
+              shell: pwsh
