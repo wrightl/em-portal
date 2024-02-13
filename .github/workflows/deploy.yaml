@@ -74,7 +74,7 @@ jobs:
 
             - name: Debug 1
               run : |
-                  Write-Host "$Env.MANAGED_IDENTITY_CLIENT_ID"
+                  Write-Host "$Env:MANAGED_IDENTITY_CLIENT_ID"
               shell: pwsh
 
             - name: Provision Infrastructure
@@ -86,8 +86,8 @@ jobs:
 
             - name: Debug 2
               run : |
-                  Write-Host "$Env.MANAGED_IDENTITY_CLIENT_ID"
-                  Write-Host "$Env.SQLSERVER_NAME"
+                  Write-Host "$Env:MANAGED_IDENTITY_CLIENT_ID"
+                  Write-Host "$Env:SQLSERVER_NAME"
               shell: pwsh
 
             - name: Deploy Application
@@ -97,6 +97,6 @@ jobs:
 
             - name: Debug 3
               run : |
-                  Write-Host "$Env.MANAGED_IDENTITY_CLIENT_ID"
-                  Write-Host "$Env.SQLSERVER_NAME"
+                  Write-Host "$Env:MANAGED_IDENTITY_CLIENT_ID"
+                  Write-Host "$Env:SQLSERVER_NAME"
               shell: pwsh
