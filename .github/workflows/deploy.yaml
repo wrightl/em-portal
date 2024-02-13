@@ -82,9 +82,9 @@ jobs:
                   SQL_USERNAME: ${{ secrets.SQL_USERNAME }}
                   SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
 
-            - name: Deploy Application
-              run: azd deploy --no-prompt --debug
-              env:
-                  AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
-                  AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
-                  AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+            # - name: Deploy Application
+            #   run: azd deploy --no-prompt --debug
+            #   env:
+            #       AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
+            #       AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+            #       AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
