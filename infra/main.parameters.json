@@ -19,6 +19,9 @@
         },
         "sql_password": {
             "value": "${SQL_PASSWORD}"
+        },
+        "sqlserver_name": {
+            "value": "${SQLSERVER_NAME}"
         }
     }
 }
