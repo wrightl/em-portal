@@ -29,6 +29,8 @@ properties:
         value: "true"
       - name: OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES
         value: "true"
+      - name: ConnectionStrings__TicketsDb
+        value: '{{ connectionString "TicketsDb" }}'
     scale:
       minReplicas: 0
 tags:
