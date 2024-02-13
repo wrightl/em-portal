@@ -50,3 +50,5 @@ output AZURE_CONTAINER_APPS_ENVIRONMENT_ID string = resources.outputs.AZURE_CONT
 output AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN string = resources.outputs.AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN
 output AUTH0_DOMAIN string = auth0_domain
 output AUTH0_CLIENTID string = auth0_clientid
+output SQL_USERNAME string = sql_username
+output SQL_PASSWORD string = sql_password
