@@ -80,7 +80,9 @@ jobs:
               shell: pwsh
 
             - name: Provision Infrastructure
-              run: azd provision --no-prompt
+              run: |
+                  $json = azd provision --no-prompt
+                  Write-Host $json
               env:
                   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
                   SQL_USERNAME: ${{ secrets.SQL_USERNAME }}
@@ -95,13 +97,16 @@ jobs:
               shell: pwsh
 
             - name: Deploy Application
-              run: azd deploy --no-prompt --debug
+              run: |
+                  $json2 = azd deploy --no-prompt --debug
+                  Write-Host $json2
               env:
                   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
 
             - name: Debug 3
               run : |
-                  azd env get-values
+                  $json3 = azd env get-values
+                  Write-Host "env: $json3"
                   Write-Host "Identity: $Env:MANAGED_IDENTITY_CLIENT_ID"
                   Write-Host "Auth0: $Env:AUTH0_DOMAIN2"
                   Write-Host "Sql: $Env:SQLSERVER_NAME"
