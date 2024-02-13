@@ -107,7 +107,7 @@ resource cache 'Microsoft.App/containerApps@2023-05-02-preview' = {
       ]
     }
   }
-  tags: union(tags, {'aspire-resource-name': 'cache'}, {'test': 'lmw'})
+  tags: union(tags, {'aspire-resource-name': 'cache'})
 }
 
 resource prometheus 'Microsoft.App/containerApps@2023-05-02-preview' = {

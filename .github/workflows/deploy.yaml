@@ -76,15 +76,15 @@ jobs:
             - name: Provision Infrastructure
               run: azd provision --no-prompt
               env:
-                  AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
+                #   AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
                   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
-                  AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+                #   AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
                   SQL_USERNAME: ${{ secrets.SQL_USERNAME }}
                   SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
 
-            # - name: Deploy Application
-            #   run: azd deploy --no-prompt --debug
-            #   env:
+            - name: Deploy Application
+              run: azd deploy --no-prompt --debug
+              env:
             #       AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
-            #       AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+                  AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
             #       AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
