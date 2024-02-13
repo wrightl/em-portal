@@ -101,6 +101,7 @@ jobs:
 
             - name: Debug 3
               run : |
+                  azd env get-values
                   Write-Host "Identity: $Env:MANAGED_IDENTITY_CLIENT_ID"
                   Write-Host "Auth0: $Env:AUTH0_DOMAIN2"
                   Write-Host "Sql: $Env:SQLSERVER_NAME"
