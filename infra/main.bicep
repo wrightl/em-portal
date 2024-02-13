@@ -9,7 +9,9 @@ param environmentName string
 @description('The location used for all deployed resources')
 param location string
 
+@secure()
 param auth0_clientid string
+@secure()
 param auth0_domain string
 
 @secure()
