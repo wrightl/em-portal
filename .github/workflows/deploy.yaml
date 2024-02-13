@@ -101,6 +101,7 @@ jobs:
                   Write-Host $json2
               env:
                   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+              shell: pwsh
 
             - name: Debug 3
               run : |
