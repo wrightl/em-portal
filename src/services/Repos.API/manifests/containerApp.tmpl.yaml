@@ -30,7 +30,7 @@ properties:
       - name: OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES
         value: "true"
       - name: ConnectionStrings__TicketsDb
-        value: 'Server=tcp:{{ .Env.SQLSERVER_NAME }}.database.windows.net,1433;Initial Catalog=TicketsDb;Persist Security Info=False;User ID={{ .Env.sql_username }};Password={{ .Env.sql_password }};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
+        value: 'Server=tcp:{{ .Env.sqlserver_name }}.database.windows.net,1433;Initial Catalog=TicketsDb;Persist Security Info=False;User ID={{ .Env.sql_username }};Password={{ .Env.sql_password }};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
     scale:
       minReplicas: 0
 tags:
