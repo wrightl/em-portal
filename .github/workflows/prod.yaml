@@ -18,4 +18,5 @@ jobs:
             AUTH0_DOMAIN: ${{ vars.AUTH0_DOMAIN_PROD }}
             AUTH0_CLIENTID: ${{ vars.AUTH0_CLIENTID_PROD }}
         secrets:
-            AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+            SQL_USERNAME: ${{ secrets.SQL_USERNAME }}
+            SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}

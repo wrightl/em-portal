@@ -22,7 +22,9 @@ on:
                 required: true
                 type: string
         secrets:
-            AZURE_CREDENTIALS:
+            SQL_USERNAME:
+                required: true
+            SQL_PASSWORD:
                 required: true
 
 jobs:
@@ -33,7 +35,7 @@ jobs:
             AZURE_CLIENT_ID: ${{ inputs.AZURE_CLIENT_ID }}
             AZURE_TENANT_ID: ${{ inputs.AZURE_TENANT_ID }}
             AZURE_SUBSCRIPTION_ID: ${{ inputs.AZURE_SUBSCRIPTION_ID }}
-            AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+            # AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
             AUTH0_DOMAIN: ${{ inputs.AUTH0_DOMAIN }}
             AUTH0_CLIENTID: ${{ inputs.AUTH0_CLIENTID }}
         steps:
@@ -52,19 +54,19 @@ jobs:
                     --tenant-id "$Env:AZURE_TENANT_ID"
               shell: pwsh
 
-            - name: Log in with Azure (Client Credentials)
-              if: ${{ env.AZURE_CREDENTIALS != '' }}
-              run: |
-                  $info = $Env:AZURE_CREDENTIALS | ConvertFrom-Json -AsHashtable;
-                  Write-Host "::add-mask::$($info.clientSecret)"
+            # - name: Log in with Azure (Client Credentials)
+            #   if: ${{ env.AZURE_CREDENTIALS != '' }}
+            #   run: |
+            #       $info = $Env:AZURE_CREDENTIALS | ConvertFrom-Json -AsHashtable;
+            #       Write-Host "::add-mask::$($info.clientSecret)"
 
-                  azd auth login `
-                    --client-id "$($info.clientId)" `
-                    --client-secret "$($info.clientSecret)" `
-                    --tenant-id "$($info.tenantId)"
-              shell: pwsh
-              env:
-                  AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+            #       azd auth login `
+            #         --client-id "$($info.clientId)" `
+            #         --client-secret "$($info.clientSecret)" `
+            #         --tenant-id "$($info.tenantId)"
+            #   shell: pwsh
+            #   env:
+            #       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
             - name: Install aspire workload
               run: |
