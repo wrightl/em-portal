@@ -77,12 +77,10 @@ jobs:
                   Write-Host "Identity: $Env:MANAGED_IDENTITY_CLIENT_ID"
                   Write-Host "Auth0: $Env:AUTH0_DOMAIN2"
                   Write-Host "Sql: $Env:SQLSERVER_NAME"
-              shell: pwsh
 
             - name: Provision Infrastructure
               run: |
-                  $json = azd provision --no-prompt
-                  Write-Host $json
+                  azd provision --no-prompt
               env:
                   AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
                   SQL_USERNAME: ${{ secrets.SQL_USERNAME }}
@@ -94,7 +92,6 @@ jobs:
                   Write-Host "Identity: $Env:MANAGED_IDENTITY_CLIENT_ID"
                   Write-Host "Auth0: $Env:AUTH0_DOMAIN2"
                   Write-Host "Sql: $Env:SQLSERVER_NAME"
-              shell: pwsh
 
             - name: Deploy Application
               run: |
@@ -110,4 +107,3 @@ jobs:
                   Write-Host "Identity: $Env:MANAGED_IDENTITY_CLIENT_ID"
                   Write-Host "Auth0: $Env:AUTH0_DOMAIN2"
                   Write-Host "Sql: $Env:SQLSERVER_NAME"
-              shell: pwsh
