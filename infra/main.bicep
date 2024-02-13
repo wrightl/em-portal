@@ -9,15 +9,15 @@ param environmentName string
 @description('The location used for all deployed resources')
 param location string
 
-// @secure()
-// param auth0_clientid string
-// @secure()
-// param auth0_domain string
+@secure()
+param auth0_clientid string
+@secure()
+param auth0_domain string
 
-// @secure()
-// param sql_username string
-// @secure()
-// param sql_password string
+@secure()
+param sql_username string
+@secure()
+param sql_password string
 
 @secure()
 @metadata({azd: {type: 'inputs' }})
@@ -48,5 +48,5 @@ output AZURE_CONTAINER_REGISTRY_ENDPOINT string = resources.outputs.AZURE_CONTAI
 output AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID string = resources.outputs.AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID
 output AZURE_CONTAINER_APPS_ENVIRONMENT_ID string = resources.outputs.AZURE_CONTAINER_APPS_ENVIRONMENT_ID
 output AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN string = resources.outputs.AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN
-// output AUTH0_DOMAIN string = auth0_domain
-// output AUTH0_CLIENTID string = auth0_clientid
+output AUTH0_DOMAIN string = auth0_domain
+output AUTH0_CLIENTID string = auth0_clientid
