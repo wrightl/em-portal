@@ -79,7 +79,7 @@ resource databaseServer 'Microsoft.Sql/servers@2023-05-01-preview' = {
 }
 
 resource database 'Microsoft.Sql/servers/databases@2023-05-01-preview' = {
-  name: '${databaseServer.name}/sqldb-${resourceToken}'
+  name: '${databaseServer.name}/TicketsDb'
   location: location
   sku: {
     name: 'Basic'
@@ -141,3 +141,4 @@ output AZURE_CONTAINER_REGISTRY_ENDPOINT string = containerRegistry.properties.l
 output AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID string = managedIdentity.id
 output AZURE_CONTAINER_APPS_ENVIRONMENT_ID string = containerAppEnvironment.id
 output AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN string = containerAppEnvironment.properties.defaultDomain
+output SQLSERVER_NAME string = databaseServer.name
