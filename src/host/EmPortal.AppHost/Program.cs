@@ -1,5 +1,12 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
+// Set in user-secrets
+var sqlpassword = builder.Configuration["sqlpwd"];
+
+var sql = builder.AddSqlServerContainer("sql", sqlpassword)
+    .WithVolumeMount("VolumeMount.sqlserver.data", "/var/opt/mssql", VolumeMountType.Named)
+    .AddDatabase("TicketsDb");
+
 var cache = builder.AddRedis("cache");
 
 builder.AddContainer("prometheus", "prom/prometheus")
@@ -7,6 +14,7 @@ builder.AddContainer("prometheus", "prom/prometheus")
        .WithServiceBinding(9090, hostPort: 9090);
 
 var repos = builder.AddProject<Projects.Repos_API>("repos")
+    .WithReference(sql)
     .WithReference(cache);
 
 builder.AddProject<Projects.EmPortal_Client>("frontend")
