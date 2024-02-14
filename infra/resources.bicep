@@ -69,24 +69,24 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' 
   tags: tags
 }
 
-resource databaseServer 'Microsoft.Sql/servers@2023-05-01-preview' = {
-  name: 'sqlserver-${resourceToken}'
-  location: location
-  properties: {
-    administratorLogin: sql_username
-    administratorLoginPassword: sql_password
-  }
-}
+// resource databaseServer 'Microsoft.Sql/servers@2023-05-01-preview' = {
+//   name: 'sqlserver-${resourceToken}'
+//   location: location
+//   properties: {
+//     administratorLogin: sql_username
+//     administratorLoginPassword: sql_password
+//   }
+// }
 
-resource database 'Microsoft.Sql/servers/databases@2023-05-01-preview' = {
-  name: '${databaseServer.name}/TicketsDb'
-  location: location
-  sku: {
-    name: 'Basic'
-    size: 'Basic'
-    tier: 'Basic'
-  }
-}
+// resource database 'Microsoft.Sql/servers/databases@2023-05-01-preview' = {
+//   name: '${databaseServer.name}/TicketsDb'
+//   location: location
+//   sku: {
+//     name: 'Basic'
+//     size: 'Basic'
+//     tier: 'Basic'
+//   }
+// }
 
 resource cache 'Microsoft.App/containerApps@2023-05-02-preview' = {
   name: 'cache'
@@ -163,4 +163,4 @@ output AZURE_CONTAINER_REGISTRY_ENDPOINT string = containerRegistry.properties.l
 output AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID string = managedIdentity.id
 output AZURE_CONTAINER_APPS_ENVIRONMENT_ID string = containerAppEnvironment.id
 output AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN string = containerAppEnvironment.properties.defaultDomain
-output SQLSERVER_NAME string = databaseServer.name
+// output SQLSERVER_NAME string = databaseServer.name
