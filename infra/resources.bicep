@@ -110,6 +110,28 @@ resource cache 'Microsoft.App/containerApps@2023-05-02-preview' = {
   tags: union(tags, {'aspire-resource-name': 'cache'})
 }
 
+resource locations 'Microsoft.App/containerApps@2023-05-02-preview' = {
+  name: 'locations'
+  location: location
+  properties: {
+    environmentId: containerAppEnvironment.id
+    configuration: {
+      service: {
+        type: 'postgres'
+      }
+    }
+    template: {
+      containers: [
+        {
+          image: 'postgres'
+          name: 'postgres'
+        }
+      ]
+    }
+  }
+  tags: union(tags, {'aspire-resource-name': 'locations'})
+}
+
 resource prometheus 'Microsoft.App/containerApps@2023-05-02-preview' = {
   name: 'prometheus'
   location: location
