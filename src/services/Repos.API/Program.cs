@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add aspire components
-builder.AddSqlServerDbContext<TicketContext>("TicketsDb");
+builder.AddNpgsqlDbContext<TicketContext>("TicketsDb");
+// builder.AddSqlServerDbContext<TicketContext>("TicketsDb");
 builder.AddServiceDefaults();
 builder.AddRedisDistributedCache("cache");
 
@@ -32,7 +33,7 @@ app.MapPost("/tickets", async (TicketContext context, SupportTicket ticket) =>
     await context.SaveChangesAsync();
 });
 
-// await app.Services.ApplyMigrations();
+await app.Services.ApplyMigrations();
 
 
 // Configure the HTTP request pipeline.

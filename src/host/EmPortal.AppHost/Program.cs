@@ -1,7 +1,7 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
 // Add the locations database.
-var locationsdb = builder.AddPostgres("db").AddDatabase("locations");
+var locationsdb = builder.AddPostgres("sql").AddDatabase("TicketsDb");
 
 // // Set in user-secrets
 // var sqlpassword = builder.Configuration["sqlpwd"];
