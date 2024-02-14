@@ -88,6 +88,28 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' 
 //   }
 // }
 
+resource ticketsDb 'Microsoft.App/containerApps@2023-05-02-preview' = {
+  name: 'ticketsdb'
+  location: location
+  properties: {
+    environmentId: containerAppEnvironment.id
+    configuration: {
+      service: {
+        type: 'postgres'
+      }
+    }
+    template: {
+      containers: [
+        {
+          image: 'postgres'
+          name: 'postgres'
+        }
+      ]
+    }
+  }
+  tags: union(tags, {'aspire-resource-name': 'TicketsDb'})
+}
+
 resource cache 'Microsoft.App/containerApps@2023-05-02-preview' = {
   name: 'cache'
   location: location
@@ -108,28 +130,6 @@ resource cache 'Microsoft.App/containerApps@2023-05-02-preview' = {
     }
   }
   tags: union(tags, {'aspire-resource-name': 'cache'})
-}
-
-resource locations 'Microsoft.App/containerApps@2023-05-02-preview' = {
-  name: 'locations'
-  location: location
-  properties: {
-    environmentId: containerAppEnvironment.id
-    configuration: {
-      service: {
-        type: 'postgres'
-      }
-    }
-    template: {
-      containers: [
-        {
-          image: 'postgres'
-          name: 'postgres'
-        }
-      ]
-    }
-  }
-  tags: union(tags, {'aspire-resource-name': 'locations'})
 }
 
 resource prometheus 'Microsoft.App/containerApps@2023-05-02-preview' = {
@@ -163,4 +163,3 @@ output AZURE_CONTAINER_REGISTRY_ENDPOINT string = containerRegistry.properties.l
 output AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID string = managedIdentity.id
 output AZURE_CONTAINER_APPS_ENVIRONMENT_ID string = containerAppEnvironment.id
 output AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN string = containerAppEnvironment.properties.defaultDomain
-// output SQLSERVER_NAME string = databaseServer.name
