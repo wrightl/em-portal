@@ -32,7 +32,7 @@ app.MapPost("/tickets", async (TicketContext context, SupportTicket ticket) =>
     await context.SaveChangesAsync();
 });
 
-await app.Services.ApplyMigrations();
+// await app.Services.ApplyMigrations();
 
 
 // Configure the HTTP request pipeline.
