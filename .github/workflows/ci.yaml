@@ -1,0 +1,24 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4.1.1
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+
+    - name: Install aspire workload
+      run: |
+          dotnet workload install aspire
+      shell: pwsh
+ 
+    - name: dotnet build
+      run: dotnet build EmPortal.sln -c Release
+
+    - name: dotnet test
+      run: dotnet test EmPortal.sln -c Release --no-build

@@ -1,0 +1,113 @@
+name: Main deployment workflow
+
+on:
+    workflow_call:
+        inputs:
+            AZURE_ENV_NAME:
+                required: true
+                type: string
+            AZURE_CLIENT_ID:
+                required: true
+                type: string
+            AZURE_TENANT_ID:
+                required: true
+                type: string
+            AZURE_SUBSCRIPTION_ID:
+                required: true
+                type: string
+            AUTH0_DOMAIN:
+                required: true
+                type: string
+            AUTH0_CLIENTID:
+                required: true
+                type: string
+        secrets:
+            SQL_USERNAME:
+                required: true
+            SQL_PASSWORD:
+                required: true
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        env:
+            AZURE_ENV_NAME: ${{ inputs.AZURE_ENV_NAME }}
+            AZURE_CLIENT_ID: ${{ inputs.AZURE_CLIENT_ID }}
+            AZURE_TENANT_ID: ${{ inputs.AZURE_TENANT_ID }}
+            AZURE_SUBSCRIPTION_ID: ${{ inputs.AZURE_SUBSCRIPTION_ID }}
+            AUTH0_DOMAIN: ${{ inputs.AUTH0_DOMAIN }}
+            AUTH0_CLIENTID: ${{ inputs.AUTH0_CLIENTID }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.1.1
+
+            - name: Install azd
+              uses: Azure/setup-azd@v0.1.0
+
+            - name: Log in with Azure (Federated Credentials)
+              if: ${{ env.AZURE_CLIENT_ID != '' }}
+              run: |
+                  azd auth login `
+                    --client-id "$Env:AZURE_CLIENT_ID" `
+                    --federated-credential-provider "github" `
+                    --tenant-id "$Env:AZURE_TENANT_ID"
+              shell: pwsh
+
+            # - name: Log in with Azure (Client Credentials)
+            #   if: ${{ env.AZURE_CREDENTIALS != '' }}
+            #   run: |
+            #       $info = $Env:AZURE_CREDENTIALS | ConvertFrom-Json -AsHashtable;
+            #       Write-Host "::add-mask::$($info.clientSecret)"
+
+            #       azd auth login `
+            #         --client-id "$($info.clientId)" `
+            #         --client-secret "$($info.clientSecret)" `
+            #         --tenant-id "$($info.tenantId)"
+            #   shell: pwsh
+            #   env:
+            #       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+
+            - name: Install aspire workload
+              run: |
+                  dotnet workload install aspire
+              shell: pwsh
+
+            - name: Debug 1
+              run : |
+                  Write-Host "Identity: $Env:MANAGED_IDENTITY_CLIENT_ID"
+                  Write-Host "Auth0: $Env:AUTH0_DOMAIN2"
+                  Write-Host "Sql: $Env:SQLSERVER_NAME"
+              shell: pwsh
+
+            - name: Provision Infrastructure
+              run: |
+                  azd provision --no-prompt
+              env:
+                  AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+                  SQL_USERNAME: ${{ secrets.SQL_USERNAME }}
+                  SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+
+            - name: Debug 2
+              run : |
+                  azd env refresh
+                  Write-Host "Identity: $Env:MANAGED_IDENTITY_CLIENT_ID"
+                  Write-Host "Auth0: $Env:AUTH0_DOMAIN2"
+                  Write-Host "Sql: $Env:SQLSERVER_NAME"
+              shell: pwsh
+
+            - name: Deploy Application
+              run: |
+                  $json2 = azd deploy --no-prompt --debug
+                  Write-Host $json2
+              env:
+                  AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+              shell: pwsh
+
+            - name: Debug 3
+              run : |
+                  $json3 = azd env get-values
+                  Write-Host "env: $json3"
+                  Write-Host "Identity: $Env:MANAGED_IDENTITY_CLIENT_ID"
+                  Write-Host "Auth0: $Env:AUTH0_DOMAIN2"
+                  Write-Host "Sql: $Env:SQLSERVER_NAME"
+              shell: pwsh
