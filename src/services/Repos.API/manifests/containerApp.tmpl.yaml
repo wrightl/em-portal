@@ -25,8 +25,8 @@ properties:
         value: {{ .Env.MANAGED_IDENTITY_CLIENT_ID }}
       - name: ConnectionStrings__cache
         value: '{{ connectionString "cache" }}'
-      - name: ConnectionStrings__locations
-        value: '{{ connectionString "locations" }}'
+      - name: ConnectionStrings__TicketsDb
+        value: '{{ connectionString "TicketsDb" }}'
       - name: OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES
         value: "true"
       - name: OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES
