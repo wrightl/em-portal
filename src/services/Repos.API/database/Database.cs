@@ -1,5 +1,5 @@
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Net.Sockets;
@@ -54,7 +54,7 @@ public static class EntityFrameworkExtensions
                 logger.LogInformation("Created dummy data in database.");
                 break;
             }
-            catch (SqlException ex) when (ex.Message.Contains("an error occurred during the pre-login handshake"))
+            catch (PostgresException ex) //when (ex.Message.Contains("an error occurred during the pre-login handshake"))
             {
                 // Known error in Aspire, when SQL Server is not ready. See: https://github.com/dotnet/aspire/issues/1023
                 retryCount++;
